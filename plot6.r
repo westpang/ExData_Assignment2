@@ -13,7 +13,8 @@ plot6 <- rbind(plot2,plot3)
 plot6$Fips[plot6$Fips=="24510"] <- "Baltimore City"
 plot6$Fips[plot6$Fips=="06037"] <- "Los Angeles County"
 
-ggplot(plot6,aes(x=Year,y=Emissions,color=Fips))+geom_line()+ggtitle(expression('Baltimore City & Los Angeles Country Motor Vehicle Total Emission of PM'[2.5]))+labs(x="Year",y=expression(paste('PM', ''[2.5], ' in tons')))
+ggplot(plot6, aes(factor(Year), Emissions))+facet_grid(. ~ Fips)+geom_bar(stat="identity")  +
+  labs(x="Year",y=expression(paste('PM', ''[2.5], ' in tons')))+ggtitle(expression('Baltimore City & Los Angeles Country Motor Vehicle Total Emission of PM'[2.5]))
 
 dev.copy(png,filename="plot6.png",width = 480, height = 480)
 dev.off()
